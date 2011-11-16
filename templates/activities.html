@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+<table>
+<tbody><tr>
+    <th>Title</th>
+    <th>Location</th>
+    <th>Funder</th>
+    <th>Implementer</th>
+    <th>Date</th>
+
+    <th>Status</th>
+    <th>Amount</th>
+  </tr>
+    {% if projects %}
+        {% for project in projects %}
+            <tr>
+    <td><span class="activity title"><a href="{{ project.id }}">{{ project.title }}</a></span><br><span class="activity description">{{ project.description }}</p></span></td>
+    <td>{{ project.recipient_country }}</td>
+
+			    <td>{{ project.funding_org }}<br>({{ project.extending_org }})</td>
+			    <td>{{ project.implementing_org }}</td>
+	
+	    <td>{{ project.date_start_planned }} - {{ project.date_end_planned }}</td>
+	
+    <td>{{ project.status }}</td>
+    <td></td>
+
+ </tr>
+        {% endfor %}
+    {% endif %}
+    
+       
+</tbody>
+</table>
+{% endblock %}

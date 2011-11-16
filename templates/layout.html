@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>IATI Data</title>
+  </head>
+<link href="{{ url_for('static', filename='style.css') }}" media="screen" rel="stylesheet" type="text/css" />
+<body>
+<div id="page-wrapper">
+<div id="beta">Still in very early development and likely to change substantially and frequently. Please do not rely on this data.</div>
+<p><a href="/">Index</a> | <a href="/activity/">Activities</a></p>
+<h1 class="title">IATI Data</h1>
+<hr class="title" />	
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
+<div id="credits"><a href="https://github.com/markbrough/IATI-Data">Source code</a>. License: <a href="http://www.gnu.org/licenses/agpl-3.0.html">Affero GPL v3</a>. Thanks to DFID, the World Bank and the Hewlett Foundation for publishing to IATI.</div>
+</div>
+</body>
+</html>

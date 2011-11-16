@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if project %}
+      <h1>{{ project.title }}</h1>
+      <p>{{ project.description }}</p>
+      <br />
+      <p><b>Recipient country:</b> {{ project.recipient_country }}</p>
+      <p><b>Funding org:</b> {{ project.funding_org }}</p>
+      <p><b>Extending org:</b> {{ project.extending_org }}</p>
+      <p><b>Implementing org:</b> {{ project.implementing_org }}</p>
+      <p><b>Planned start:</b> {{ project.date_start_planned }}</p>
+      <p><b>Actual start:</b> {{ project.date_start_actual }}</p>
+      <p><b>Planned end:</b> {{ project.date_end_planned }}</p>
+      <p><b>Actual end:</b> {{ project.date_end_actual }}</p>
+    {% endif %}
+{% endblock %}
