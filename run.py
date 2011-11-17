@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash
+from flask import Flask, render_template, flash, request, Markup
 from flaskext.sqlalchemy import SQLAlchemy
 from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey, UnicodeText, Date, Float
 app = Flask(__name__)
@@ -118,18 +118,26 @@ class RelatedActivity(db.Model):
     reltype = db.Column(UnicodeText)
 
 @app.route("/")
-def index():
-    return "Hello World!"
-
-@app.route("/activity/")
-@app.route("/activity/<int:activity_id>")
-def show_activity(activity_id=None):
+@app.route("/activities/")
+@app.route("/activities/<int:activity_id>")
+def activities(activity_id=None):
     if activity_id:
         p = Activity.query.filter_by(id=activity_id).first()
         return render_template('activity.html', project=p)
     else:
-        p  = Activity.query.order_by(Activity.id)[0:5]
-        return render_template('activities.html', projects=p)
+        c = Activity.query.count()
+        if request.args.getlist('page'):
+            thispage = int((request.args.getlist('page'))[0])
+        else:
+            thispage = 1
+        firstresult = thispage * 10
+        lastresult = firstresult + 10
+        maxpages = (c/10)
+        pages = 'Page: '
+        for x in range (1, maxpages):
+            pages += ' <a href="?page=' + str(x) + '">' + str(x) + '</a>'
+        p  = Activity.query.order_by(Activity.id)[firstresult:lastresult]
+        return render_template('activities.html', projects=p, count=c, pages=Markup(pages), page=thispage)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
+<h2>Found {{ count }} activities</h2>
+<p>Page: {{ page }}</p>
 <table>
 <tbody><tr>
     <th>Title</th>
@@ -14,7 +16,7 @@
     {% if projects %}
         {% for project in projects %}
             <tr>
-    <td><span class="activity title"><a href="{{ project.id }}">{{ project.title }}</a></span><br><span class="activity description">{{ project.description }}</p></span></td>
+    <td><span class="activity title"><a href="{{ url_for('activities', activity_id=project.id) }}">{{ project.title }}</a></span><br><span class="activity description">{{ project.description }}</p></span></td>
     <td>{{ project.recipient_country }}</td>
 
 			    <td>{{ project.funding_org }}<br>({{ project.extending_org }})</td>
@@ -28,8 +30,7 @@
  </tr>
         {% endfor %}
     {% endif %}
-    
-       
 </tbody>
 </table>
+{{ pages }}
 {% endblock %}
